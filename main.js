@@ -30,6 +30,7 @@ function Initmap() {
     info.onAdd = function (map) {
           this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
           //this.update();
+          this._div.id = "info";
           return this._div;
         };
     info.addTo(mymap);
@@ -95,13 +96,13 @@ function DrawDoctors() {
             radius: getRadiusFromPatNum(doctor.mean_pat_num)
         }).addTo(mymap);
 
-        circle_list[doctor.docid] = circle;
         circle.doc = doctor;
+        circle_list[doctor.docid] = circle;
 
         circle.bindPopup(
             "<p class=\"circlepopup\">"+
             "      Id: "+doctor.docid.toString()+
-            "<br />BZ: "+doctor.land_name.toString()+
+            "<br />Land: "+doctor.land_name.toString()+
             "<br />Patients:"+
             " "+Math.round(doctor.mean_pat_num).toString()+
             "<br />Displacement:"+
@@ -131,6 +132,35 @@ function DrawDoctors() {
               })
               this.closePopup();
         });
+        circle.on('click', function (e) {
+              // var zoom = mymap.getZoom();
+              let doctor = this.doc; // recalls a global var
+
+              if(e.originalEvent.altKey || e.originalEvent.shiftKey) {
+                // RemoveDoctor(doctor.docid);
+                return;
+              } else {
+                $('#info').html(
+                  //"<p>"+
+                  "Id:"+doctor.docid.toString()+"<br>"+
+//                  "BZ:"+doctor.district_name.toString()+"<br>"+
+                  "Activity:"+Math.floor(doctor.mean_pat_num).toString()+"<br>"
+                  //+"</p>"
+                );
+              }
+
+              this.setStyle( {
+                fillOpacity: 0.5,
+                color: 'white'
+              })
+
+          });
+        circle.on('dblclick', function (e) {
+
+                //RemoveDoctor(this.doc.docid);
+
+          });
+
       }
 
     });

@@ -20,21 +20,21 @@ p.linkpopup {
     font-size: 30px;
 }
 
-.info {
-    padding: 30px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    /*background: white;*/
-    background: rgba(167,167,167,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+#info {
+/* new */
+    /* width: 200px;*/
+    line-height: 1;
+    max-height: 300px;
+    overflow: auto;
+/*******/
+    padding: 4px 4px;
+    background: rgba(167,167,167,0.6);
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
     border-radius: 5px;
-    font-size: 40px;
-}
-.info h4 {
-                margin: 0 0 5px;
-                color: #777;
+    font-size: 16px;
 }
 
-.doc_info {
+#doc_info {
     padding: 4px 4px;
     font: 14px/16px Arial, Helvetica, sans-serif;
     /*background: white;*/
