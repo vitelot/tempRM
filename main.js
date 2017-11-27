@@ -222,5 +222,7 @@ function getColorFromDisp(d) {
 }
 
 function getRadiusFromPatNum(d) {
-  return d;
+  let val = 50*Math.sqrt(d);
+  // let val = 200*Math.log(1.1+d);
+  return (val>3000)? 3000: val;
 }
