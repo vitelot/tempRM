@@ -2,3 +2,11 @@
 data/doctors*
 data/d2.info
 .DS_Store
+
+\.idea/modules\.xml
+
+\.idea/tempRM\.iml
+
+\.idea/vcs\.xml
+
+\.idea/workspace\.xml
