@@ -25,6 +25,29 @@ var max_val = 1;
 values = createdummyvalues(100,max_val);
 
 
+
+//create div overlay for plot
+function setupPlot() {
+    var info = L.control({ position: 'bottomright' });
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'plot'); // create a div with a class "info"
+        this._div.id = "plotid";
+        return this._div;
+    };
+    info.addTo(mymap);
+}
+
+function initPlotAsChild()
+{
+    var newSvg = document.getElementById('plotid');
+    newSvg.outerHTML += '<svg width="400" height="150"></svg>';
+
+
+    initstandaloneplot();
+
+}
+
 function initstandaloneplot()
 {
 
@@ -37,6 +60,7 @@ function initstandaloneplot()
 
  initplot();
 }
+
 
 function initleafletplot()
 {
