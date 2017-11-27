@@ -86,7 +86,7 @@ function initplot()
         .range([0, width]);
 
     y = d3.scaleLinear()
-        .domain([0, 1])
+        .domain([0.6, 1])
         .range([height, 0]);
 
     g.append("defs").append("clipPath")
@@ -97,7 +97,7 @@ function initplot()
 
     g.append("g")
         .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + y(0) + ")")
+        .attr("transform", "translate(0," + y(0.6) + ")")
         .call(d3.axisBottom(x));
 
     g.append("g")
