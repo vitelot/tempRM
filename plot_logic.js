@@ -5,7 +5,8 @@
 
 var n = 40,
     random = d3.randomNormal(0, .2),
-    data = d3.range(n).map(function (d) {return 0;});
+    //fill plot with initial values
+    data = d3.range(n).map(function (d) {return 1;});
 var width;
 var height;
 var svg;
@@ -72,7 +73,6 @@ function initleafletplot()
         width = +400 - margin.left - margin.right,
         height = +150 - margin.top - margin.bottom,
         g = svg.append("g").attr("class", "leaflet-zoom-hide");
-        //svg.append("")
 
     initplot();
 }
@@ -132,7 +132,13 @@ function createdummyvalues(nvals, mx)
 }
 
 
+function feedPlot(m)
+{
+    // works on the plotting_values[] glob var
+    // takes x somehow as time...
 
+    // let value = (m.p1*x+m.p2)/(x+m.q1);
+}
 
 
 
@@ -156,5 +162,6 @@ function tick() {
     data.shift();
 
     time_count++;
+    values.push();
 
 }

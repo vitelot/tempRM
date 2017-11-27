@@ -11,3 +11,4 @@
 var disp_max;       // max displacement among doctors
 var circle_list = {};	// list of circles (doctors)
 var plotting_values = []; // values to be plot in the extra layer
+var current_val = 1; //stores the currently generated plot value

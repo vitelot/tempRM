@@ -176,17 +176,12 @@ function RemoveDoctor(docid) {
     q1: doctor.q1
   };
 
-  // feedPlot(model);
+  feedPlot(model);
 
   setTimeout(KillCircle, 200, circle_list[docid]);
 }
 
-function feedPlot(m) {
-  // works on the plotting_values[] glob var
-  // takes x somehow as time...
 
-  // let value = (m.p1*x+m.p2)/(x+m.q1);
-}
 
 function KillCircle(circle) {
 
