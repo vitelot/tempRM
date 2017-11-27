@@ -3,6 +3,7 @@ function main() {
 
   DrawLand();
 
+  InfoBox();
   docInfos();
 
 //    runningSim();
@@ -25,15 +26,6 @@ function Initmap() {
     //mymap.setView(new L.LatLng(47.488, 12.881),7); // whole Austria
     mymap.setView(new L.LatLng(47.1666, 13.000),7);
   	mymap.addLayer(osm);
-
-    var info = L.control();
-    info.onAdd = function (map) {
-          this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-          //this.update();
-          this._div.id = "info";
-          return this._div;
-        };
-    info.addTo(mymap);
 
     mymap.doubleClickZoom.disable();
 
@@ -79,7 +71,7 @@ function DrawDoctors() {
   var docs = [];
   let i;
 
-    $.getJSON("./data/doctors.json", function(docs) {
+    $.getJSON("./data/doctors_new.json", function(docs) {
       var max = 0;
       for(i in docs) {
           let disp = parseFloat(docs[i].mean_disp);
@@ -137,13 +129,13 @@ function DrawDoctors() {
               let doctor = this.doc; // recalls a global var
 
               if(e.originalEvent.altKey || e.originalEvent.shiftKey) {
-                // RemoveDoctor(doctor.docid);
+                RemoveDoctor(doctor.docid);
                 return;
               } else {
                 $('#info').html(
                   //"<p>"+
                   "Id:"+doctor.docid.toString()+"<br>"+
-//                  "BZ:"+doctor.district_name.toString()+"<br>"+
+                  "BZ:"+doctor.district_name.toString()+"<br>"+
                   "Activity:"+Math.floor(doctor.mean_pat_num).toString()+"<br>"
                   //+"</p>"
                 );
@@ -157,13 +149,39 @@ function DrawDoctors() {
           });
         circle.on('dblclick', function (e) {
 
-                //RemoveDoctor(this.doc.docid);
+                RemoveDoctor(this.doc.docid);
 
           });
 
       }
 
     });
+}
+
+function RemoveDoctor(docid) {
+// this function is triggered when a doctor is removed
+// i.e. when SHIFT-click or ALT-click is pressed
+// docid: the id of the doctor to be removed
+
+	setTimeout(KillCircle, 1000, circle_list[docid]);
+}
+
+function KillCircle(circle) {
+
+  printInfo(
+      //"<p>"+
+      "Removing doctor with "+
+      "Id="+circle.doc.docid.toString()+"<br>"
+      //+"</p>"
+  );
+
+  delete circle_list[circle.doc.docid];
+  mymap.removeLayer(circle);
+
+}
+
+function printInfo(text) {
+  $('#info').prepend(text);
 }
 
 function getColorFromFG(fg) {

@@ -1,4 +1,33 @@
 /////////////////////////////////////////////
+ function InfoBox() {
+	// here we create the info box at the upper right corner
+	// where information of the running processes will
+	// be reported
+
+    var info = L.control();
+    info.onAdd = function (map) {
+          this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+          //this.update();
+			this._div.id = "info"; // and id="info"
+          return this._div;
+        };
+    info.addTo(mymap);
+
+    $("#info").append("Info box:<br>");
+
+	$('#info').hover(function() {
+			$(this).css("background", "rgba(250,250,250,0.6)");
+	}, function() {
+			$(this).css("background", "rgba(167,167,167,0.6)");
+	});
+
+	$('#info').click( function() {
+		$(this).html("");
+	});
+}
+
+
+/////////////////////////////////////////////
 function docInfos() {
 	var info = L.control({ position: 'bottomleft' });
 
