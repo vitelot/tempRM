@@ -43,7 +43,7 @@ function initPlotAsChild()
 {
     let newSvg = d3.select("#plotid").append("svg")
                     .attr("width", 400)
-                    .attr("height", 150)
+                    .attr("height", 150);
 
     initstandaloneplot();
 
@@ -137,15 +137,46 @@ function feedPlot(m)
     // works on the plotting_values[] glob var
     // takes x somehow as time...
 
-    // let value = (m.p1*x+m.p2)/(x+m.q1);
+    //var x = 5;
+    //let value = (m.p1*x+m.p2)/(x+m.q1);
+    //console.log(value);
+
+    if(update_doctors == false)
+    {
+        current_doc = m;
+        time_count = 1;
+        update_doctors = true;
+    }
+    else console.warn("current simulation still running!");
+
 }
 
-
+var update_doctors = false;
+var current_doc;
+var max_days = 12;
+var current_scale = 1;
 
 function tick() {
 
-    // Push a new data point onto the back.
-    data.push(values[time_count]);
+    if(update_doctors)
+    {
+        if(time_count <= max_days)
+        {
+            var factor = (current_doc.p1 * time_count + current_doc.p2) / (time_count + current_doc.q1);
+            // var diff = current_val - factor;
+            var scaled = current_scale * factor;
+            current_val = scaled;
+            if(current_val > 1) current_val = 1;
+        }
+        else
+        {
+            update_doctors = false;
+            current_scale = current_val;
+        }
+    }
+
+    // Push a new data point onto the back
+    data.push(current_val);
 
     // Redraw the line.
     d3.select(this)
