@@ -169,7 +169,23 @@ function RemoveDoctor(docid) {
 // i.e. when SHIFT-click or ALT-click is pressed
 // docid: the id of the doctor to be removed
 
-	setTimeout(KillCircle, 1000, circle_list[docid]);
+  let doctor = circle_list[docid].doc;
+  let model = {
+    p1: doctor.p1,
+    p2: doctor.p2,
+    q1: doctor.q1
+  };
+
+  // feedPlot(model);
+
+  setTimeout(KillCircle, 200, circle_list[docid]);
+}
+
+function feedPlot(m) {
+  // works on the plotting_values[] glob var
+  // takes x somehow as time...
+
+  // let value = (m.p1*x+m.p2)/(x+m.q1);
 }
 
 function KillCircle(circle) {
