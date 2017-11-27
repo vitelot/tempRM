@@ -28,21 +28,21 @@ values = createdummyvalues(100,max_val);
 
 //create div overlay for plot
 function setupPlot() {
-    var info = L.control({ position: 'bottomright' });
+    let plot = L.control({ position: 'bottomright' });
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'plot'); // create a div with a class "info"
+    plot.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'plot'); // create a div with a class "plot"
         this._div.id = "plotid";
         return this._div;
     };
-    info.addTo(mymap);
+    plot.addTo(mymap);
 }
 
 function initPlotAsChild()
 {
-    var newSvg = document.getElementById('plotid');
-    newSvg.outerHTML += '<svg width="400" height="150"></svg>';
-
+    let newSvg = d3.select("#plotid").append("svg")
+                    .attr("width", 400)
+                    .attr("height", 150)
 
     initstandaloneplot();
 
@@ -52,7 +52,7 @@ function initstandaloneplot()
 {
 
 
- svg = d3.select("svg"),
+ svg = d3.select("#plotid svg"),
     margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
@@ -65,7 +65,9 @@ function initstandaloneplot()
 function initleafletplot()
 {
 
-    svg = d3.select(mymap.getPanes().overlayPane).append("svg"),
+    let svg =
+      // d3.select(mymap.getPanes().overlayPane).append("svg"),
+      d3.select("#plotid").append("svg"),
         margin = {top: 20, right: 20, bottom: 20, left: 40},
         width = +400 - margin.left - margin.right,
         height = +150 - margin.top - margin.bottom,
