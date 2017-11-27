@@ -19,7 +19,7 @@ function Initmap() {
   	//var osmUrl='http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png';
 
   	var osmAttrib='Complexity Science Hub Vienna | Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-  	var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 13, attribution: osmAttrib});
+  	var osm = new L.TileLayer(osmUrl, {minZoom: 7, maxZoom: 13, attribution: osmAttrib});
 
   	// start the map in Austria
     //mymap.setView(new L.LatLng(47.488, 12.881),7); // whole Austria
