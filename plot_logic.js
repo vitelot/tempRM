@@ -46,7 +46,7 @@ function initleafletplot()
         width = +400 - margin.left - margin.right,
         height = +150 - margin.top - margin.bottom,
         g = svg.append("g").attr("class", "leaflet-zoom-hide");
-        svg.append("")
+        //svg.append("")
 
     initplot();
 }
@@ -132,4 +132,3 @@ function tick() {
     time_count++;
 
 }
-
