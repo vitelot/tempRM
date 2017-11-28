@@ -3,15 +3,10 @@
  */
 
 
-var n = 40,
-    random = d3.randomNormal(0, .2),
-    //fill plot with initial values
-    data = d3.range(n).map(function (d) {return 1;});
-var width;
-var height;
-var svg;
-var margin;
-var g;
+//     random = d3.randomNormal(0, .2),
+//     //fill plot with initial values
+var n = 40;
+var data = d3.range(n).map(function (d) {return 1;});
 var x;
 var y;
 
@@ -23,63 +18,38 @@ var line = d3.line()
 var time_count = 0;
 var values = [];
 var max_val = 1;
-values = createdummyvalues(100,max_val);
+// values = createdummyvalues(100,max_val);
 
 
 
 //create div overlay for plot
-function setupPlot() {
-    let plot = L.control({ position: 'bottomright' });
+function Plot() {
+
+  // use leaflet controls to create an empty <div class="plot" id="plotid">
+    var plot = L.control({ position: 'bottomright' });
 
     plot.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'plot'); // create a div with a class "plot"
+        this._div = L.DomUtil.create('div', 'plot');
         this._div.id = "plotid";
         return this._div;
     };
     plot.addTo(mymap);
-}
 
-function initPlotAsChild()
-{
-    let newSvg = d3.select("#plotid").append("svg")
-                    .attr("width", 400)
-                    .attr("height", 150);
-
-    initstandaloneplot();
-
-}
-
-function initstandaloneplot()
-{
-
-
- svg = d3.select("#plotid svg"),
-    margin = {top: 20, right: 20, bottom: 20, left: 40},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
- initplot();
-}
-
-
-function initleafletplot()
-{
-
-    let svg =
-      // d3.select(mymap.getPanes().overlayPane).append("svg"),
-      d3.select("#plotid").append("svg"),
+    var svg_width = 400,
+        svg_height = 150,
         margin = {top: 20, right: 20, bottom: 20, left: 40},
-        width = +400 - margin.left - margin.right,
-        height = +150 - margin.top - margin.bottom,
-        g = svg.append("g").attr("class", "leaflet-zoom-hide");
+        width = svg_width - margin.left - margin.right,
+        height = svg_height - margin.top - margin.bottom;
 
-    initplot();
-}
 
-function initplot()
-{
+    // select the div and create an svg canvas inside
+    var svg = d3.select("#plotid").append("svg")
+                    .attr("width", svg_width)
+                    .attr("height", svg_height);
 
+
+    var g = svg.append("g") // this group will contain the plot
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");;
 
     x = d3.scaleLinear()
         .domain([0, n - 1])
@@ -113,24 +83,7 @@ function initplot()
         .duration(500)
         .ease(d3.easeLinear)
         .on("start", tick);
-
-
 }
-
-
-function createdummyvalues(nvals, mx)
-{
-    var vals = [];
-    var frac = mx / nvals;
-
-    for(var i=0; i<nvals; i++)
-    {
-        vals.push(frac*i);
-    }
-
-    return vals;
-}
-
 
 function feedPlot(m)
 {
@@ -196,3 +149,16 @@ function tick() {
     values.push();
 
 }
+
+// function createdummyvalues(nvals, mx)
+// {
+//     var vals = [];
+//     var frac = mx / nvals;
+//
+//     for(var i=0; i<nvals; i++)
+//     {
+//         vals.push(frac*i);
+//     }
+//
+//     return vals;
+// }

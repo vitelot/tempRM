@@ -6,11 +6,7 @@ function main() {
   InfoBox();
   docInfos();
 
-  // initleafletplot();
-
-  setupPlot();
-  initPlotAsChild();
-
+  Plot();
 
 //    runningSim();
 }
