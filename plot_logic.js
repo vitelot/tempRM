@@ -38,7 +38,7 @@ function Plot() {
 
     var svg_width = 400,
         svg_height = 150,
-        margin = {top: 20, right: 20, bottom: 20, left: 40},
+        margin = {top: 20, right: 20, bottom: 30, left: 50},
         width = svg_width - margin.left - margin.right,
         height = svg_height - margin.top - margin.bottom;
 
@@ -74,6 +74,26 @@ function Plot() {
     g.append("g")
         .attr("class", "axis axis--y")
         .call(d3.axisLeft(y));
+
+
+    var padding = 80;
+    g.selectAll(".xaxis text")  // select all the text elements for the xaxis
+        .attr("transform", function(d) {
+            return "translate(" + this.getBBox().height*-2 + "," + this.getBBox().height + ")rotate(-45)";
+        });
+
+    // now add titles to the axes
+    g.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ (-padding/2.5) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+        .text("RIL");
+
+    g.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ (width/2) +","+(height+(padding/3))+")")  // centre below axis
+        .text("Day");
+
+
 
     g.append("g")
         .attr("clip-path", "url(#clip)")
