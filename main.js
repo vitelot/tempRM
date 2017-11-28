@@ -22,7 +22,7 @@ function Initmap() {
   	//var osmUrl='http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png';
 
   	var osmAttrib='Complexity Science Hub Vienna | Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-  	var osm = new L.TileLayer(osmUrl, {minZoom: 7, maxZoom: 13, attribution: osmAttrib});
+  	var osm = new L.TileLayer(osmUrl, {minZoom: 7, maxZoom: 11, attribution: osmAttrib});
 
   	// start the map in Austria
     //mymap.setView(new L.LatLng(47.488, 12.881),7); // whole Austria
@@ -30,6 +30,22 @@ function Initmap() {
   	mymap.addLayer(osm);
 
     mymap.doubleClickZoom.disable();
+
+
+    mymap.on('zoomend', function(e) {
+      let i;
+        if(mymap.getZoom()>=11) {
+          for(i in circle_list) {
+            var c = circle_list[i];
+            c.setRadius(getRadiusFromPatNum(c.doc.mean_pat_num)/6);
+          }
+        } else if (mymap.getZoom()==10) {
+          for(i in circle_list) {
+            var c = circle_list[i];
+            c.setRadius(getRadiusFromPatNum(c.doc.mean_pat_num));
+          }
+        }
+    });
 
 }
 
@@ -119,7 +135,11 @@ function DrawDoctors() {
               this.openPopup();
           });
         circle.on('mouseout', function (e) {
-              this.setRadius(getRadiusFromPatNum(this.doc.mean_pat_num));
+              if(mymap.getZoom()>=11) {
+                this.setRadius(getRadiusFromPatNum(this.doc.mean_pat_num)/6);
+              } else {
+                this.setRadius(getRadiusFromPatNum(this.doc.mean_pat_num));                
+              }
               this.setStyle( {
                 fillOpacity: 0.8,
                 color: 'Null'
