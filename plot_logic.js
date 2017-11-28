@@ -56,7 +56,7 @@ function Plot() {
         .range([0, width]);
 
     y = d3.scaleLinear()
-        .domain([0.6, 1])
+        .domain([0.4, 1])
         .range([height, 0]);
 
     g.append("defs").append("clipPath")
@@ -67,7 +67,7 @@ function Plot() {
 
     g.append("g")
         .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + y(0.6) + ")")
+        .attr("transform", "translate(0," + y(0.4) + ")")
         .call(d3.axisBottom(x));
 
     g.append("g")
@@ -85,6 +85,13 @@ function Plot() {
         .on("start", tick);
 }
 
+var update_doctors = false;
+var current_doc;
+var doc_queue = [];
+var max_days = 12;
+var current_scale = 1;
+var lastdoc;
+
 function feedPlot(m)
 {
     // works on the plotting_values[] glob var
@@ -94,39 +101,78 @@ function feedPlot(m)
     //let value = (m.p1*x+m.p2)/(x+m.q1);
     //console.log(value);
 
-    if(update_doctors == false)
-    {
-        current_doc = m;
+    // if(update_doctors == false)
+    // {
+        //current_doc = m;
+        var currentdoc = new doc();
+        currentdoc.model = m;
+    var factor;
+
+    if(lastdoc == undefined)
+            currentdoc.fscale = 1.0;
+    else {
+        factor = (lastdoc.model.p1 * 12 + lastdoc.model.p2) / (12 + lastdoc.model.q1);
+        currentdoc.fscale = factor * lastdoc.fscale;
+    }
+
+        console.log("new scale: " + currentdoc.fscale);
+        console.log("factor: " + factor);
+
+        lastdoc = currentdoc;
+
+        doc_queue.push(currentdoc);
         time_count = 1;
         update_doctors = true;
-    }
-    else console.warn("current simulation still running!");
 
+        //update scale
+        current_scale *= m.p1;
+    // }
+    // else console.warn("current simulation still running!");
 }
 
-var update_doctors = false;
-var current_doc;
-var max_days = 12;
-var current_scale = 1;
+function doc() {
+    this.model;
+    this.expiration = 1;
+    this.fscale;
+}
 
 function tick() {
 
     if(update_doctors)
     {
-        if(time_count <= max_days)
+        var bla = 1;
+        for(var i=0; i<doc_queue.length; i++)
         {
-            var factor = (current_doc.p1 * time_count + current_doc.p2) / (time_count + current_doc.q1);
+            var factor = (doc_queue[i].model.p1 * doc_queue[i].expiration + doc_queue[i].model.p2) / (doc_queue[i].expiration + doc_queue[i].model.q1);
+            //var scaled = doc_queue[i].fscale * factor;
+            // doc_queue[i].expiration++;
+            bla *= factor;
+
+            if(doc_queue[i].expiration < max_days)
+                doc_queue[i].expiration++;
+
+            // doc_queue.splice(i, 1);
+        }
+
+    //     if(time_count <= max_days)
+    //     {
+            //var factor = (current_doc.p1 * time_count + current_doc.p2) / (time_count + current_doc.q1);
             // var diff = current_val - factor;
-            var scaled = current_scale * factor;
-            current_val = scaled;
-            if(current_val > 1) current_val = 1;
-        }
-        else
-        {
-            update_doctors = false;
-            current_scale = current_val;
-        }
+            //var scaled = current_scale * factor;
+
+        current_val = bla;
+        if(current_val > 1) current_val = 1;
+
+        // }
+        // else
+        // {
+        //     update_doctors = false;
+        //     current_scale = current_val;
+    //     }
     }
+
+
+
 
     // Push a new data point onto the back
     data.push(current_val);
