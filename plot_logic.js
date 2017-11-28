@@ -134,6 +134,7 @@ function tick() {
 
     x.domain([0+time_count, n - 1+time_count]);
     //x.range([0+time_count, 400+time_count]);
+    xaxis.call(d3.axisBottom(x));
 
 
     // Redraw the line.
@@ -150,11 +151,7 @@ function tick() {
     // Pop the old data point off the front.
     data.shift();
 
-    x.domain([0+time_count, n - 1+time_count]);
-    xaxis.call(d3.axisBottom(x));
     time_count++;
-
-
 
     values.push();
 
