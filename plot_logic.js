@@ -17,7 +17,7 @@ var line = d3.line()
     .y(function(d, i) { return y(d); });
 
 var time_count = 0;
-var values = [];
+//var values = [];
 var max_val = 1;
 // values = createdummyvalues(100,max_val);
 
@@ -153,7 +153,7 @@ function tick() {
 
     time_count++;
 
-    values.push();
+  //  values.push();
 
 }
 
