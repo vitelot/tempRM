@@ -9,6 +9,7 @@ var n = 40;
 var data = d3.range(n).map(function (d) {return 1;});
 var x;
 var y;
+var xaxis;
 
 
 var line = d3.line()
@@ -65,7 +66,7 @@ function Plot() {
         .attr("width", width)
         .attr("height", height);
 
-    g.append("g")
+    xaxis = g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + y(0.4) + ")")
         .call(d3.axisBottom(x));
@@ -127,8 +128,13 @@ function tick() {
         if(current_val > 1) current_val = 1;
     }
 
+
     // Push a new data point onto the back
     data.push(current_val);
+
+    x.domain([0+time_count, n - 1+time_count]);
+    //x.range([0+time_count, 400+time_count]);
+
 
     // Redraw the line.
     d3.select(this)
@@ -137,14 +143,19 @@ function tick() {
 
     // Slide it to the left.
     d3.active(this)
-        .attr("transform", "translate(" + x(-1) + ",0)")
+        .attr("transform", "translate(" + x(0+time_count) + ",0)")
         .transition()
         .on("start", tick);
 
     // Pop the old data point off the front.
     data.shift();
 
+    x.domain([0+time_count, n - 1+time_count]);
+    xaxis.call(d3.axisBottom(x));
     time_count++;
+
+
+
     values.push();
 
 }
