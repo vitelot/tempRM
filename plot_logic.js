@@ -13,7 +13,7 @@ var xaxis;
 
 
 var line = d3.line()
-    .x(function(d, i) { return x(i); })
+    .x(function(d, i) { return x(i+time_count); })
     .y(function(d, i) { return y(d); });
 
 var time_count = 0;
