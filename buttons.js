@@ -39,13 +39,15 @@ function docInfos() {
 
 	info.addTo(mymap);
 	$('.doc_info').prepend('\
-		Mouse-over doctor to display information.<br />\
-		Doctor sizes represent the number of patients visited per quarter;<br />\
-		Doctor colors represent the average number of displacements each<br />\
+		Mouse-over a primary health-care provider to display information.<br />\
+		Circle size represents the number of patients visited per quarter.<br />\
+		Circle color represents the average number of displacements each<br />\
 		patient must undergo to find a new available doctor.<br />\
-		BLUE: Low average displacements;<br />\
+		BLUE: low average displacements.<br />\
 		RED: High average displacements.<br />\
-		<b>DOCTOR POSITION IS FIXED AT RANDOM</b>');
+		Double click to remove health-care provider. Observe the drop in<br />\
+		the percentage of patients being cared for in bottom right graph.<br />\
+		<b>DOCTOR POSITION IS FIXED AT RANDOM WITHIN SAME LAND</b>');
 }
 
 /////////////////////////////////////////////
