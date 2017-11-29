@@ -133,7 +133,7 @@ function doc() {
 }
 
 var lambda = 1.005;
-var last_val;
+var last_val = 1;
 var expired = false;
 
 
@@ -154,7 +154,8 @@ function tick() {
 
     if(update_doctors)
     {
-        var totalfactor = 1;
+        var totalfactor = last_val;
+
         for(var i=0; i<doc_queue.length; i++)
         {
             var factor = (doc_queue[i].model.p1 * doc_queue[i].expiration + doc_queue[i].model.p2) / (doc_queue[i].expiration + doc_queue[i].model.q1);
@@ -167,26 +168,22 @@ function tick() {
 
         if(allDocsExpired())
         {
-            // console.log("docs expired!");
+            doc_queue = [];
             if(expired)
             {
-                // console.log("init!");
                 last_val = current_val;
                 expired = false;
             }
             current_val = last_val * lambda;
             last_val = current_val;
         }
-        // console.log(current_val);
         if(current_val > 1) current_val = 1;
     }
-
 
     // Push a new data point onto the back
     data.push(current_val);
 
     x.domain([0+time_count, n - 1+time_count]);
-    //x.range([0+time_count, 400+time_count]);
     xaxis.call(d3.axisBottom(x));
 
 
@@ -205,9 +202,6 @@ function tick() {
     data.shift();
 
     time_count++;
-
-  //  values.push();
-
 }
 
 // function createdummyvalues(nvals, mx)
