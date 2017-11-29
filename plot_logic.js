@@ -123,6 +123,7 @@ function feedPlot(m)
     currentdoc.model = m;
     doc_queue.push(currentdoc);
 
+    expired = true;
     update_doctors = true;
 }
 
@@ -130,6 +131,24 @@ function doc() {
     this.model;
     this.expiration = 1;
 }
+
+var lambda = 1.005;
+var last_val;
+var expired = false;
+
+
+function allDocsExpired()
+{
+    var expired = true;
+
+    for(var i=0; i<doc_queue.length; i++)
+    {
+        if(doc_queue[i].expiration <= max_days)
+            expired = false;
+    }
+    return expired;
+}
+
 
 function tick() {
 
@@ -145,6 +164,20 @@ function tick() {
                 doc_queue[i].expiration++;
         }
         current_val = totalfactor;
+
+        if(allDocsExpired())
+        {
+            // console.log("docs expired!");
+            if(expired)
+            {
+                // console.log("init!");
+                last_val = current_val;
+                expired = false;
+            }
+            current_val = last_val * lambda;
+            last_val = current_val;
+        }
+        // console.log(current_val);
         if(current_val > 1) current_val = 1;
     }
 
