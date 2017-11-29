@@ -47,3 +47,12 @@ function docInfos() {
 		RED: High average displacements.<br />\
 		<b>DOCTOR POSITION IS FIXED AT RANDOM</b>');
 }
+
+/////////////////////////////////////////////
+function logoCSH() {
+
+  $('.leaflet-top.leaflet-left')
+        .append('<img id="csh_logo" height="50px" src="./img/CSH_Logo.png"/>')
+        .append('<img id="csh_logo" height="50px" src="./img/LogoSM.png"/>');
+
+}

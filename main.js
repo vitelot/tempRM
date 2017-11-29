@@ -5,7 +5,8 @@ function main() {
 
   InfoBox();
   docInfos();
-
+  logoCSH();
+  
   Plot();
 
 //    runningSim();
@@ -138,7 +139,7 @@ function DrawDoctors() {
               if(mymap.getZoom()>=11) {
                 this.setRadius(getRadiusFromPatNum(this.doc.mean_pat_num)/6);
               } else {
-                this.setRadius(getRadiusFromPatNum(this.doc.mean_pat_num));                
+                this.setRadius(getRadiusFromPatNum(this.doc.mean_pat_num));
               }
               this.setStyle( {
                 fillOpacity: 0.8,
