@@ -52,6 +52,7 @@ function docInfos() {
 function logoCSH() {
 
   $('.leaflet-top.leaflet-left')
-        .append('<img id="csh_logo" width="200px" src="./img/CSH_Logo.png"/>');
+        .append('<img id="csh_logo" height="50px" src="./img/CSH_Logo.png"/>')
+        .append('<img id="csh_logo" height="50px" src="./img/LogoSM.png"/>');
 
 }
