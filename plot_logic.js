@@ -57,7 +57,7 @@ function Plot() {
         .range([0, width]);
 
     y = d3.scaleLinear()
-        .domain([0.4, 1])
+        .domain([0.4, 1.05])
         .range([height, 0]);
 
     g.append("defs").append("clipPath")
@@ -73,7 +73,7 @@ function Plot() {
 
     g.append("g")
         .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).tickValues([.4, .5, .6, .7, .8, .9, 1.0]));
 
 
     var padding = 80;
