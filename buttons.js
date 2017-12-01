@@ -47,8 +47,10 @@ function docInfos() {
 		BLUE: short/low reduction of accessibility<br/>\
     RED: long/severe reduction of accessibilty<br/>\
     <b> Scenario creation:</b><br/>\
-    Double click on a HCP to create a scenario where this HCP becomes inactive. The impact on the remaining health care system can be observed in  the dynamic graph to the bottom right.\
-    There time progresses on the x-axis (in days). The y-axis shows the percentage of patients in the given district with immediate access to a HCP, which defines the Resilience Indicator Level (RIL).\
+    Double click on a HCP to create a scenario where this HCP becomes inactive. \
+    The impact on the remaining health care system can be observed in  the dynamic graph to the bottom right.\
+    There time progresses on the x-axis (in days). The y-axis shows the percentage\
+     of patients in the given district with immediate access to a HCP, which defines the Resilience Indicator Level (RIL).\
     to remove health-care provider. Observe the drop in the percentage of patients being cared for in bottom right graph.<br/>\
 		<b>HEALTH-CARE PROVIDERS IS FIXED AT RANDOM WITHIN SAME LAND</b>');
 }
