@@ -13,7 +13,7 @@
         };
     info.addTo(mymap);
 
-    $("#info").append("Info box<br>");
+    $("#info").append("Info box:<br>");
 
 	$('#info').hover(function() {
 			$(this).css("background", "rgba(250,250,250,0.6)");
@@ -40,7 +40,9 @@ function docInfos() {
 	info.addTo(mymap);
 	$('.doc_info').prepend('\
     Systemic risk map of health care in Austria.<br />\
-    For each primary health care provider (HCP) we study how an assumed inoperability of the HCP affects the remaining health care system.\
+    For each primary health care provider (HCP)<br/>\
+    we study how an assumed inoperability of the HCP affects<br/>\
+    the remaining health care system.<br/>\
     Each circle represents an HCP.<br/>  \
     The size of the circle indicates the number of treated patients per quarter.<br/>\
     The color of the circles indicate for how long health care is inaccessible for patients of the local HCP.<br/>\
@@ -62,7 +64,7 @@ function docInfos() {
 function logoCSH() {
 
   $('.leaflet-top.leaflet-left')
-        .append('<img class="logo" src="./img/CSH_Logo.png"/>')
-        .append('<img class="logo" src="./img/LogoSM.png"/>');
+        .append('<img id="csh_logo" height="50px" src="./img/CSH_Logo.png"/>')
+        .append('<img id="csh_logo" height="50px" src="./img/LogoSM.png"/>');
 
 }
