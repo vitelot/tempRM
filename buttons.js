@@ -47,7 +47,7 @@ function docInfos() {
 		RED: High average displacements.<br />\
 		Double click to remove health-care provider. Observe the drop in<br />\
 		the percentage of patients being cared for in bottom right graph.<br />\
-		<b>DOCTOR POSITION IS FIXED AT RANDOM WITHIN SAME LAND</b>');
+		<b>HEALTH-CARE PROVIDERS IS FIXED AT RANDOM WITHIN SAME LAND</b>');
 }
 
 /////////////////////////////////////////////
