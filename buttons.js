@@ -13,7 +13,7 @@
         };
     info.addTo(mymap);
 
-    $("#info").append("Info box:<br>");
+    $("#info").append("Info box<br>");
 
 	$('#info').hover(function() {
 			$(this).css("background", "rgba(250,250,250,0.6)");

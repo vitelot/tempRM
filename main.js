@@ -159,7 +159,7 @@ function DrawDoctors() {
                   //"<p>"+
                   "Id:"+doctor.docid.toString()+"<br>"+
                   "BZ:"+doctor.district_name.toString()+"<br>"+
-                  "Activity:"+Math.floor(doctor.mean_pat_num).toString()+"<br>"
+                  "Activity:"+Math.round(doctor.mean_pat_num).toString()+"<br>"
                   //+"</p>"
                 );
               }
