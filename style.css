@@ -13,6 +13,10 @@ html, body {
                 top: 0.0%;
 }
 
+img.logo {
+  height: 50px;
+}
+
 p.circlepopup {
     font-size: 25px;
 }
@@ -66,5 +70,5 @@ p.circlepopup {
 .line {
     fill: none;
     stroke: #000;
-    stroke-width: 1.5px;
+    stroke-width: 2px;
 }

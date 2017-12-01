@@ -6,7 +6,7 @@ function main() {
   InfoBox();
   docInfos();
   logoCSH();
-  
+
   Plot();
 
 //    runningSim();
@@ -112,8 +112,8 @@ function DrawDoctors() {
 
         circle.bindPopup(
             "<p class=\"circlepopup\">"+
-            "      Id: "+doctor.docid.toString()+
-            "<br />Land: "+doctor.land_name.toString()+
+            //"      Id: "+doctor.docid.toString()+
+            "Land: "+doctor.land_name.toString()+
             "<br />Patients:"+
             " "+Math.round(doctor.mean_pat_num).toString()+
             "<br />Displacement:"+
@@ -159,7 +159,7 @@ function DrawDoctors() {
                   //"<p>"+
                   "Id:"+doctor.docid.toString()+"<br>"+
                   "BZ:"+doctor.district_name.toString()+"<br>"+
-                  "Activity:"+Math.floor(doctor.mean_pat_num).toString()+"<br>"
+                  "Patients:"+Math.floor(doctor.mean_pat_num).toString()+"<br>"
                   //+"</p>"
                 );
               }
